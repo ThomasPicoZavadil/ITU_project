@@ -1,0 +1,101 @@
+/* Reset default styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Background gradient */
+.mainscr {
+    background: linear-gradient(to bottom, #e0f7fa, #0091d4);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    position: relative;
+}
+
+/* Menu icon */
+.menu {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    cursor: pointer;
+}
+
+.content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title and subtitle styling */
+.title {
+    font-size: 8em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: black;
+    padding-bottom: 150px;
+}
+
+/* Search container styling */
+.search-container {
+    margin-top: -100px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styling */
+.button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.search-button {
+    background-color: #ffffff;
+    color: #333;
+    font-weight: bold;
+}
+
+.add-button {
+    background-color: #e0e0e0;
+    color: #333;
+    margin-top: 15px;
+}
+
+.recommendation {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 10px;
+    margin-top: 20px;
+}
