@@ -1,20 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./mainscr.css";
-import { FiMenu } from "react-icons/fi"; // For the menu icon
+import { FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { KeywordContext } from "./App";
+import { ParamContext } from "./App";
 
 function Mainscr() {
-    const navigate = useNavigate()
-    const { keyword: contextvalue, setKeyword } = useContext(KeywordContext)
+    const navigate = useNavigate();
+    const { params, setParams } = useContext(ParamContext);
 
     const handleKeywordChange = (e) => {
-        setKeyword((prev) => ({ ...prev, keyword: e.target.value })); // Update state with input value
+        setParams((prev) => ({ ...prev, keyword: e.target.value }));
+    };
+
+    const handleLanguageChange = (e) => {
+        setParams((prev) => ({ ...prev, language: e.target.value }));
     };
 
     const handleSearch = () => {
-        console.log("Keyword:", contextvalue); // Use the keyword for your functionality
-        navigate("/App")
+        console.log("Keyword:", params.keyword);
+        console.log("Language:", params.language);
+        navigate("/App");
     };
 
     return (
@@ -29,9 +34,14 @@ function Mainscr() {
                 </p>
 
                 <div className="search-container">
-                    <input type="text" className="input keyword" placeholder="Keyword:"
-                        value={contextvalue.keyword} onChange={handleKeywordChange} />
-                    <input type="text" className="input language" placeholder="Language: " />
+                    <input
+                        type="text"
+                        className="input keyword"
+                        placeholder="Keyword:"
+                        value={params.keyword}
+                        onChange={handleKeywordChange}
+                    />
+                    <input type="text" className="input language" placeholder="Language: " value={params.language} onChange={handleLanguageChange} />
                     <input type="date" className="input date" />
                 </div>
 

@@ -1,5 +1,3 @@
-
-
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState, useContext, createContext } from 'react';
@@ -11,57 +9,52 @@ import Col from 'react-bootstrap/Col';
 import Mainscr from './mainscr';
 
 // Create the context
-export const KeywordContext = createContext({ keyword: "", setKeyword: () => { } });
+export const ParamContext = createContext({
+  params: { keyword: "", language: "" },
+  setParams: () => { }
+});
 
 
 function News() {
-
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const keyword = useContext(KeywordContext);
+  const { params } = useContext(ParamContext); // Access params from context
 
-
-  //Make api call to news api
+  // Make API call to news api
   async function getNewsData() {
-    //Set loading boolean to true so that we know to show loading text
     setLoading(true);
 
-    //Make news api call using axios
-    const resp = await axios.get("https://newsapi.org/v2/everything?q=Bitcoin&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10");
-    {/*console.log(resp.data.articles)*/ }
-    setNewsData(resp.data.articles);
+    try {
+      const resp = await axios.get(`https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}
+        &apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10`);
+      setNewsData(resp.data.articles);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
 
-    //Set loading boolean to false so that we know to show news articles
     setLoading(false);
   }
 
   useEffect(() => {
-    getNewsData();
-    console.log(keyword)
-  }, []);
-
-
+    if (params.keyword || params.language) getNewsData();
+  }, [params.keyword, params.language]);
 
   return (
     <div className="App">
       <header className="App-header">
         {loading ? "Loading..." : <Container>
-
-          {newsData.map((newsData, index) =>
-            <Row className="d-flex justify-content-center">
-              <Col xs={12} md={10} lg={8} className="mt-5" key={index}>
-                <a target="_blank" href={newsData.url}>
-                  <Card >
+          {newsData.map((article, index) =>
+            <Row className="d-flex justify-content-center" key={index}>
+              <Col xs={12} md={10} lg={8} className="mt-5">
+                <a target="_blank" rel="noopener noreferrer" href={article.url}>
+                  <Card>
                     <Card.Body className="card-body">
-                      {/*<div className="card-header">*/}
-                      <Card.Title className="my-3">  {newsData.title}</Card.Title>
-                      <Card.Img src={newsData.urlToImage} className="small-image" />
-                      {/*</div>*/}
-
+                      <Card.Title className="my-3">  {article.title}</Card.Title>
+                      <Card.Img src={article.urlToImage} className="small-image" />
                     </Card.Body>
                     <Card.Footer>
                       <Card.Text>
-                        {newsData.description}
+                        {article.description}
                       </Card.Text>
                     </Card.Footer>
                   </Card>
@@ -69,36 +62,33 @@ function News() {
               </Col>
             </Row>
           )}
-
-        </Container>
-        }
+        </Container>}
       </header>
     </div>
   );
 }
 
-
 // Create a provider component
-export const KeywordProvider = ({ children }) => {
-  const [keyword, setKeyword] = useState({
-    keyword: ""
-  });
+export const ParamProvider = ({ children }) => {
+  const [params, setParams] = useState({ keyword: "", language: "" });
 
   return (
-    <KeywordContext.Provider value={{ keyword, setKeyword }}>
+    <ParamContext.Provider value={{ params, setParams }}>
       {children}
-    </KeywordContext.Provider>
+    </ParamContext.Provider>
   );
 };
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/App" element={<News />} />
-        <Route path="/" element={<Mainscr />} />
-      </Routes>
-    </Router>
+    <ParamProvider>
+      <Router>
+        <Routes>
+          <Route path="/App" element={<News />} />
+          <Route path="/" element={<Mainscr />} />
+        </Routes>
+      </Router>
+    </ParamProvider>
   );
 }
 
