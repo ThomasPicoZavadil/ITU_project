@@ -7,10 +7,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Mainscr from './mainscr';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Create the context
 export const ParamContext = createContext({
-  params: { keyword: "", language: "" },
+  params: { keyword: "", language: "", country: "" },
   setParams: () => { }
 });
 
@@ -25,8 +26,7 @@ function News() {
     setLoading(true);
 
     try {
-      const resp = await axios.get(`https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}
-        &apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10`);
+      const resp = await axios.get(`https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5`);
       setNewsData(resp.data.articles);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -43,6 +43,8 @@ function News() {
     <div className="App">
       <header className="App-header">
         {loading ? "Loading..." : <Container>
+          <h1 className="resultsfor">Results for: {params.keyword}</h1>
+          <p className="totalresults">Total results: </p>
           {newsData.map((article, index) =>
             <Row className="d-flex justify-content-center" key={index}>
               <Col xs={12} md={10} lg={8} className="mt-5">
@@ -53,15 +55,20 @@ function News() {
                       <Card.Img src={article.urlToImage} className="small-image" />
                     </Card.Body>
                     <Card.Footer>
-                      <Card.Text>
+                      <Card.Text className="footer-content">
                         {article.description}
                       </Card.Text>
+                      <div className="icon-container">
+                        <i className="fas fa-bookmark"></i>
+                        <i className="fas fa-thumbs-up"></i>
+                      </div>
                     </Card.Footer>
                   </Card>
                 </a>
               </Col>
             </Row>
           )}
+          <button className="button show-more">Show more</button>
         </Container>}
       </header>
     </div>
