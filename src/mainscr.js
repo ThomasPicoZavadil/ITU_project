@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./mainscr.css";
 import { FiMenu } from "react-icons/fi";
+import { FaBookmark, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ParamContext } from "./App";
 
@@ -9,21 +10,13 @@ function Mainscr() {
     const { params, setParams } = useContext(ParamContext);
 
     const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-    const [quickSearchList, setQuickSearchList] = useState([]); // List of saved quicksearch options
-    const [quickSearch, setQuickSearch] = useState({ keyword: "", country: "", language: "", source: "" }); // Current quicksearch data
-
-    // Load saved quicksearches from localStorage on component mount
-    useEffect(() => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [quickSearchList, setQuickSearchList] = useState(() => {
+        // Load initial state from localStorage
         const savedQuickSearches = localStorage.getItem("quickSearchList");
-        if (savedQuickSearches) {
-            try {
-                setQuickSearchList(JSON.parse(savedQuickSearches)); // Parse JSON data safely
-            } catch (error) {
-                console.error("Error parsing localStorage data:", error);
-                setQuickSearchList([]); // Initialize with an empty array if parsing fails
-            }
-        }
-    }, []);
+        return savedQuickSearches ? JSON.parse(savedQuickSearches) : [];
+    }); // List of saved quicksearch options
+    const [quickSearch, setQuickSearch] = useState({ keyword: "", country: "", language: "", source: "" }); // Current quicksearch data
 
     // Save quicksearches to localStorage whenever the list changes
     useEffect(() => {
@@ -38,6 +31,8 @@ function Mainscr() {
         console.log("Keyword:", params.keyword);
         console.log("Language:", params.language);
         console.log("Country:", params.country);
+        console.log("From:", params.from);
+        console.log("To:", params.to);
         navigate("/App");
     };
 
@@ -68,8 +63,20 @@ function Mainscr() {
     return (
         <div className="mainscr">
             <header className="menu">
-                <FiMenu size={48} />
+                <FiMenu size={48} onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
             </header>
+            <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+                <button className="close-btn" onClick={() => setIsSidebarOpen(false)}>×</button>
+                <ul>
+                    <li onClick={() => navigate("/saved-articles")}>
+                        <FaBookmark className="icon" /> Saved Articles
+                    </li>
+                    <li onClick={() => navigate("/favorite-articles")}>
+                        <FaStar className="icon" /> Favorite Articles
+                    </li>
+                </ul>
+            </div>
+            <div className={`overlay ${isSidebarOpen ? "visible" : ""}`} onClick={() => setIsSidebarOpen(false)}></div>
             <div className="content">
                 <h1 className="title">FreshNews</h1>
                 <p className="subtitle">
@@ -106,7 +113,38 @@ function Mainscr() {
                         <option value="ud">Urdu</option>
                         <option value="zh">Chinese</option>
                     </select>
-                    <input type="date" className="input date" />
+
+                    {/* From Date */}
+                    <input
+                        type="text"
+                        className="input from"
+                        placeholder="From: "
+                        value={params.from || ""}
+                        onChange={(e) => handleChange('from', e)}
+                        onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => {
+                            e.target.type = "text";
+                            e.target.value = params.from
+                                ? new Date(params.from).toLocaleDateString("en-GB") // Format date as dd/mm/yyyy
+                                : "";
+                        }}
+                    />
+
+                    {/* To Date */}
+                    <input
+                        type="text"
+                        className="input to"
+                        placeholder="To: "
+                        value={params.to || ""}
+                        onChange={(e) => handleChange('to', e)}
+                        onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => {
+                            e.target.type = "text";
+                            e.target.value = params.to
+                                ? new Date(params.to).toLocaleDateString("en-GB") // Format date as dd/mm/yyyy
+                                : "";
+                        }}
+                    />
                 </div>
 
                 <button className="button search-button" onClick={handleSearch}>
@@ -152,13 +190,29 @@ function Mainscr() {
                             value={quickSearch.keyword}
                             onChange={handleInputChange}
                         />
-                        <input
-                            type="text"
-                            name="country"
-                            placeholder="Country"
-                            value={quickSearch.country}
+                        <select
+                            name="language"
+                            placeholder="Language"
+                            value={quickSearch.language}
                             onChange={handleInputChange}
-                        />
+                        >
+                            <option value="" disabled>Select Language</option>
+                            <option value="">All</option>
+                            <option value="en">English</option>
+                            <option value="de">German</option>
+                            <option value="fr">French</option>
+                            <option value="es">Spanish</option>
+                            <option value="it">Italian</option>
+                            <option value="no">Norwegian</option>
+                            <option value="sv">Swedish</option>
+                            <option value="nl">Dutch</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="ru">Russian</option>
+                            <option value="ar">Arabic</option>
+                            <option value="he">Hebrew</option>
+                            <option value="ud">Urdu</option>
+                            <option value="zh">Chinese</option>
+                        </select>
                         <input
                             type="text"
                             name="language"

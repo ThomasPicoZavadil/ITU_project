@@ -41,6 +41,22 @@ body {
   color: #ffffff;
 }
 
+/* Home Icon Styling */
+.home-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: black;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+.home-icon:hover {
+  color: #666666;
+  transform: scale(1.1);
+}
+
 .total-results {
   font-size: 1em;
   margin-bottom: 10px;
@@ -96,7 +112,16 @@ body {
   height: 20px;
 }
 
-.fa-bookmark,
+.icon-container .fa-bookmark {
+  cursor: pointer;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.icon-container .fa-bookmark.bookmarked {
+  color: gold; /* Highlight bookmarked articles */
+}
+
 .fa-thumbs-up {
   color: black;
   /* Icon color */
