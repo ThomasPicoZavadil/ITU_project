@@ -84,10 +84,10 @@ body {
   display: flex;
   align-items: center;
   padding: 15px;
+  font-size: 1.7em;
 }
 
 .card-title {
-  font-size: 1.9em;
   font-weight: bold;
   margin: 0;
   color: #000000;
@@ -101,9 +101,12 @@ body {
   margin-left: 10px;
 }
 
+/* Icon Container */
 .icon-container {
   display: flex;
-  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px; /* Space between icons */
 }
 
 .icon {
@@ -113,41 +116,53 @@ body {
 }
 
 .icon-container .fa-bookmark {
+  font-size: 1.8em;
   cursor: pointer;
   color: black;
-  transition: color 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+.icon-container .fa-bookmark:hover {
+  transform: scale(1.6); /* Slightly enlarge on hover */
 }
 
 .icon-container .fa-bookmark.bookmarked {
   color: gold; /* Highlight bookmarked articles */
 }
 
-.fa-thumbs-up {
+.icon-container .fa-thumbs-up {
   color: black;
   /* Icon color */
-  font-size: 1.2em;
+  font-size: 1.8em;
   /* Adjust icon size */
   margin: 0 50px;
+  transition: transform 0.3s ease;
+}
+
+.icon-container .fa-thumbs-up:hover {
+  transform: scale(1.6); /* Slightly enlarge on hover */
 }
 
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Vertically centers content */
   background-color: #f1f1f1;
   border-top: 1px solid #eeeeee;
-  padding: 10px 15px;
-  font-size: 0.9em;
+  padding: 20px 15px; /* Increase padding for a larger footer */
+  font-size: 1em; /* Adjust font size if necessary */
   color: #666666;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  min-height: 60px; /* Set a minimum height for consistency */
 }
 
+/* Footer Content */
 .footer-content {
   text-align: left;
-  flex: 1;
-  /* Takes up available space */
+  flex: 1; /* Take up available space */
+  font-size: 1.2em; /* Adjust font size for better readability */
+  line-height: 1.5; /* Increase line height for better spacing */
 }
 
 .show-more {
@@ -174,4 +189,15 @@ body {
 
 .col {
   padding: 0;
+}
+
+/* Remove underline for links */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: inherit;
 }

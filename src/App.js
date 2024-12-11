@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Mainscr from './mainscr';
+import SavedArticles from "./SavedArticles";
 import { FaHome } from 'react-icons/fa';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -85,7 +86,10 @@ function News() {
             {newsData.map((article, index) => (
               <Row className="d-flex justify-content-center" key={index}>
                 <Col xs={12} md={10} lg={8} className="mt-5">
-                  <a target="_blank" rel="noopener noreferrer" href={article.url}>
+                  <a  target="_blank"
+                      rel="noopener noreferrer"
+                      href={article.url}
+                      className="card-link">
                     <Card>
                       <Card.Body className="card-body">
                         <Card.Title className="my-3">{article.title}</Card.Title>
@@ -131,6 +135,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/App" element={<News />} />
+          <Route path="/saved-articles" element={<SavedArticles />} />
           <Route path="/" element={<Mainscr />} />
         </Routes>
       </Router>

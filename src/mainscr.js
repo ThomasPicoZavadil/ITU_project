@@ -66,13 +66,16 @@ function Mainscr() {
                 <FiMenu size={48} onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
             </header>
             <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+                {/* Close Button */}
                 <button className="close-btn" onClick={() => setIsSidebarOpen(false)}>×</button>
                 <ul>
                     <li onClick={() => navigate("/saved-articles")}>
-                        <FaBookmark className="icon" /> Saved Articles
+                        <span>Saved articles</span>
+                        <FaBookmark className="icon" />
                     </li>
                     <li onClick={() => navigate("/favorite-articles")}>
-                        <FaStar className="icon" /> Favorite Articles
+                        <span>Favorite searches</span>
+                        <FaStar className="icon" />
                     </li>
                 </ul>
             </div>
