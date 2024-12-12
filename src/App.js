@@ -15,12 +15,13 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 // Create the context
 export const ParamContext = createContext({
   params: { keyword: "", language: "", country: "", from: "", to: "" },
-  setParams: () => {}
+  setParams: () => { }
 });
 
 function News() {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [totalResults, setTotalResults] = useState(0); // Store totalResults
   const [bookmarks, setBookmarks] = useState(() => {
     // Load bookmarks from localStorage on initial render
     const savedBookmarks = localStorage.getItem("bookmarks");
@@ -39,6 +40,7 @@ function News() {
         `https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}&from=${params.from}&to=${params.to}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5`
       );
       setNewsData(resp.data.articles);
+      setTotalResults(resp.data.totalResults); // Extract and store totalResults
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -82,14 +84,14 @@ function News() {
         ) : (
           <Container>
             <h1 className="resultsfor">Results for: {params.keyword}</h1>
-            <p className="totalresults">Total results: </p>
+            <p className="totalresults">Total results: {totalResults}</p>
             {newsData.map((article, index) => (
               <Row className="d-flex justify-content-center" key={index}>
                 <Col xs={12} md={10} lg={8} className="mt-5">
-                  <a  target="_blank"
-                      rel="noopener noreferrer"
-                      href={article.url}
-                      className="card-link">
+                  <a target="_blank"
+                    rel="noopener noreferrer"
+                    href={article.url}
+                    className="card-link">
                     <Card>
                       <Card.Body className="card-body">
                         <Card.Title className="my-3">{article.title}</Card.Title>

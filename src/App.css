@@ -106,7 +106,8 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 15px; /* Space between icons */
+  /* Space between icons */
+  gap: 15px;
 }
 
 .icon {
@@ -123,11 +124,13 @@ body {
 }
 
 .icon-container .fa-bookmark:hover {
-  transform: scale(1.6); /* Slightly enlarge on hover */
+  transform: scale(1.6);
+  /* Slightly enlarge on hover */
 }
 
 .icon-container .fa-bookmark.bookmarked {
-  color: gold; /* Highlight bookmarked articles */
+  color: gold;
+  /* Highlight bookmarked articles */
 }
 
 .icon-container .fa-thumbs-up {
@@ -140,7 +143,8 @@ body {
 }
 
 .icon-container .fa-thumbs-up:hover {
-  transform: scale(1.6); /* Slightly enlarge on hover */
+  transform: scale(1.6);
+  /* Slightly enlarge on hover */
 }
 
 .card-footer {
@@ -149,20 +153,26 @@ body {
   align-items: center;
   background-color: #f1f1f1;
   border-top: 1px solid #eeeeee;
-  padding: 20px 15px; /* Increase padding for a larger footer */
-  font-size: 1em; /* Adjust font size if necessary */
+  padding: 20px 15px;
+  /* Increase padding for a larger footer */
+  font-size: 1em;
+  /* Adjust font size if necessary */
   color: #666666;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  min-height: 60px; /* Set a minimum height for consistency */
+  min-height: 60px;
+  /* Set a minimum height for consistency */
 }
 
 /* Footer Content */
 .footer-content {
   text-align: left;
-  flex: 1; /* Take up available space */
-  font-size: 1.2em; /* Adjust font size for better readability */
-  line-height: 1.5; /* Increase line height for better spacing */
+  flex: 1;
+  /* Take up available space */
+  font-size: 1.2em;
+  /* Adjust font size for better readability */
+  line-height: 1.5;
+  /* Increase line height for better spacing */
 }
 
 .show-more {

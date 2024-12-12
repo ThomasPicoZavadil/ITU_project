@@ -68,8 +68,10 @@ html {
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px; /* Fixed width to ensure consistent size */
-    box-sizing: border-box; /* Include padding and border in width calculation */
+    width: 200px;
+    /* Fixed width to ensure consistent size */
+    box-sizing: border-box;
+    /* Include padding and border in width calculation */
 }
 
 /* Button styling */
@@ -216,21 +218,25 @@ html {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -600px; /* Initially hidden */
-    width: 600px;
+    /* Initially hidden */
+    right: -500px;
+    width: 500px;
     height: 100%;
     background-color: black;
     color: white;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    transition: right 0.3s ease; /* Smooth slide-in effect */
+    transition: right 0.3s ease;
+    /* Smooth slide-in effect */
     z-index: 1000;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    /* Subtle shadow for depth */
 }
 
 .sidebar.open {
-    right: 0; /* Slide in when open */
+    right: 0;
+    /* Slide in when open */
 }
 
 /* Close Button Styling */
@@ -247,7 +253,8 @@ html {
 }
 
 .sidebar .close-btn:hover {
-    color: #888; /* Hover effect for close button */
+    color: #888;
+    /* Hover effect for close button */
 }
 
 /* Sidebar Items */
@@ -260,36 +267,46 @@ html {
 
 .sidebar ul li {
     display: flex;
-    justify-content: space-between; /* Space between text and icon */
+    justify-content: space-between;
+    /* Space between text and icon */
     align-items: center;
-    padding: 15px 20px; /* Keep container padding intact */
+    padding: 15px 20px;
+    /* Keep container padding intact */
     font-size: 2.5em;
     font-weight: bold;
     color: white;
     cursor: pointer;
     border-top: 1px solid white;
-    border-bottom: 1px solid white; /* Divider between items */
+    border-bottom: 1px solid white;
+    /* Divider between items */
     transition: background-color 0.3s ease, color 0.3s ease;
-    gap: 10px; /* Adjust gap between text and icon */
+    gap: 10px;
+    /* Adjust gap between text and icon */
 }
 
 .sidebar ul li:hover {
-    background-color: #333; /* Darker background on hover */
-    color: #f1c40f; /* Highlight text color */
+    background-color: #333;
+    /* Darker background on hover */
+    color: #f1c40f;
+    /* Highlight text color */
 }
 
 /* Sidebar Icons */
 .sidebar ul li .icon {
     width: 40px;
     height: 40px;
-    margin-left: 5px; /* Reduce margin between icon and text */
-    color: white; /* White color for icons */
+    margin-left: 5px;
+    /* Reduce margin between icon and text */
+    color: white;
+    /* White color for icons */
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .sidebar ul li:hover .icon {
-    transform: scale(1.2); /* Slightly enlarge icon on hover */
-    color: #f1c40f; /* Highlight icon on hover */
+    transform: scale(1.2);
+    /* Slightly enlarge icon on hover */
+    color: #f1c40f;
+    /* Highlight icon on hover */
 }
 
 
