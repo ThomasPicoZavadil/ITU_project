@@ -119,6 +119,14 @@ function News() {
     });
   };
 
+  const handleThumbClick = (e) => {
+    const target = e.currentTarget;
+    target.classList.add("thumb-clicked");
+    setTimeout(() => {
+      target.classList.remove("thumb-clicked");
+    }, 300);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -158,6 +166,7 @@ function News() {
                             className="fas fa-thumbs-up"
                             onClick={(e) => {
                               e.preventDefault(); // Prevent default action
+                              handleThumbClick(e); // Add animation
                               handleLikeArticle(article); // Add to likedArticles
                             }}
                             title="Like this article"

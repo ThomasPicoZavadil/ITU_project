@@ -149,9 +149,25 @@ body {
 
 .icon-container .fa-thumbs-up.thumb-clicked {
   transform: scale(1.5);
+  animation: like-bounce 0.3s ease;
   /* Enlarges the icon briefly */
   color: #4caf50;
   /* Turns green */
+}
+
+/* Keyframes for the bounce effect */
+@keyframes like-bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .card-footer {
