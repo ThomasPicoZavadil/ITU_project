@@ -36,6 +36,11 @@ function Mainscr() {
         navigate("/App");
     };
 
+    const clearLikedArticles = () => {
+        localStorage.removeItem("likedArticles");
+        alert("Liked articles have been cleared.");
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setQuickSearch((prev) => ({
@@ -152,6 +157,9 @@ function Mainscr() {
 
                 <button className="button search-button" onClick={handleSearch}>
                     Search
+                </button>
+                <button className="button clear-liked-button" onClick={clearLikedArticles}>
+                    Clear Liked Articles
                 </button>
                 <button className="button add-button" onClick={() => setIsModalOpen(true)}>
                     Add quicksearch option +

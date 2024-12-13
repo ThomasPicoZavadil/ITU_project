@@ -90,6 +90,23 @@ html {
     font-weight: bold;
 }
 
+.button.clear-liked-button {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button.clear-liked-button:hover {
+    background-color: #d93636;
+}
+
+
 .add-button {
     background-color: #e0e0e0;
     color: #333;

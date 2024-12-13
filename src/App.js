@@ -27,6 +27,18 @@ function News() {
     const savedBookmarks = localStorage.getItem("bookmarks");
     return savedBookmarks ? JSON.parse(savedBookmarks) : [];
   });
+  const [likedArticles, setLikedArticles] = useState(() => {
+    // Load from localStorage or initialize with the default structure
+    const savedLikes = localStorage.getItem("likedArticles");
+    return savedLikes
+      ? JSON.parse(savedLikes)
+      : {
+        likedKeywords: [],
+        likedCategories: [],
+        likedSources: [],
+      };
+  });
+
 
   const { params } = useContext(ParamContext); // Access params from context
   const navigate = useNavigate(); // Hook to navigate between routes
@@ -57,6 +69,10 @@ function News() {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }, [bookmarks]);
 
+  useEffect(() => {
+    localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
+  }, [likedArticles]);
+
   const handleBookmark = (article) => {
     // Check if article is already bookmarked
     const isBookmarked = bookmarks.some((b) => b.url === article.url);
@@ -71,6 +87,36 @@ function News() {
 
   const isBookmarked = (article) => {
     return bookmarks.some((b) => b.url === article.url);
+  };
+
+  const handleLikeArticle = (article) => {
+    const articleInfo = {
+      keyword: params.keyword || "Unknown Keyword", // Use the current search keyword
+      category: params.language || "General", // Use the current language as category
+      source: article.source?.name || "Unknown Source", // Use the article's source
+    };
+
+    setLikedArticles((prev) => {
+      // Create a copy of the existing structure
+      const updatedLikedArticles = { ...prev };
+
+      // Add the keyword if it doesn't already exist
+      if (!updatedLikedArticles.likedKeywords.includes(articleInfo.keyword)) {
+        updatedLikedArticles.likedKeywords.push(articleInfo.keyword);
+      }
+
+      // Add the category if it doesn't already exist
+      if (!updatedLikedArticles.likedCategories.includes(articleInfo.category)) {
+        updatedLikedArticles.likedCategories.push(articleInfo.category);
+      }
+
+      // Add the source if it doesn't already exist
+      if (!updatedLikedArticles.likedSources.includes(articleInfo.source)) {
+        updatedLikedArticles.likedSources.push(articleInfo.source);
+      }
+
+      return updatedLikedArticles; // Return the updated structure
+    });
   };
 
   return (
@@ -108,7 +154,14 @@ function News() {
                             }}
                             title={isBookmarked(article) ? "Remove Bookmark" : "Add Bookmark"}
                           ></i>
-                          <i className="fas fa-thumbs-up"></i>
+                          <i
+                            className="fas fa-thumbs-up"
+                            onClick={(e) => {
+                              e.preventDefault(); // Prevent default action
+                              handleLikeArticle(article); // Add to likedArticles
+                            }}
+                            title="Like this article"
+                          ></i>
                         </div>
                       </Card.Footer>
                     </Card>

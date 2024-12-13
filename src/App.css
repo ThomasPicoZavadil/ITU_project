@@ -139,12 +139,19 @@ body {
   font-size: 1.8em;
   /* Adjust icon size */
   margin: 0 50px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .icon-container .fa-thumbs-up:hover {
   transform: scale(1.6);
   /* Slightly enlarge on hover */
+}
+
+.icon-container .fa-thumbs-up.thumb-clicked {
+  transform: scale(1.5);
+  /* Enlarges the icon briefly */
+  color: #4caf50;
+  /* Turns green */
 }
 
 .card-footer {
