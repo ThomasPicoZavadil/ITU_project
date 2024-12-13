@@ -78,7 +78,7 @@ function Mainscr() {
                         <span>Saved articles</span>
                         <FaBookmark className="icon" />
                     </li>
-                    <li onClick={() => navigate("/favorite-articles")}>
+                    <li onClick={() => navigate("/favorite-searches")}>
                         <span>Favorite searches</span>
                         <FaStar className="icon" />
                     </li>

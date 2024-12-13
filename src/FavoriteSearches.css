@@ -1,0 +1,163 @@
+.favorite-searches {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #e0f7fa, #0091d4);
+    color: black;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.home-icon {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.home-icon:hover {
+    transform: scale(1.1);
+}
+
+.section {
+    margin-top: 40px;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    margin-bottom: -5px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.remove-icon {
+    cursor: pointer;
+    color: red;
+    transition: transform 0.2s ease;
+}
+
+.remove-icon:hover {
+    transform: scale(1.2);
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background: #007bff;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-button:hover {
+    background: #0056b3;
+}
+
+/* Add Input Field Styling */
+.add-input {
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.add-input input {
+    padding: 10px;
+    font-size: 1em;
+    margin-top: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.add-input button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.add-input button:first-of-type {
+    background: #28a745;
+    color: #fff;
+}
+
+.add-input button:first-of-type:hover {
+    background: #218838;
+}
+
+.add-input button:last-of-type {
+    background: #dc3545;
+    color: #fff;
+}
+
+.add-input button:last-of-type:hover {
+    background: #c82333;
+}
+
+.based-on-likes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.liked-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    margin-bottom: -5px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.liked-item .remove-icon {
+    cursor: pointer;
+    color: red;
+    transition: transform 0.2s ease;
+}
+
+.liked-item .remove-icon:hover {
+    transform: scale(1.2);
+}
