@@ -1,0 +1,195 @@
+/* RecommendedArticles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #e0f7fa, #0091d4);
+    background-attachment: fixed;
+    /* Keeps the gradient fixed while scrolling */
+    color: #ffffff;
+}
+
+.recommended-articles {
+    text-align: center;
+}
+
+.header {
+    padding: 20px;
+}
+
+.header h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: black;
+    /* Dark color for the text */
+}
+
+/* Home Icon Styling */
+.home-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: black;
+    z-index: 1000;
+    transition: transform 0.2s ease;
+}
+
+.home-icon:hover {
+    color: #666666;
+    transform: scale(1.1);
+}
+
+.container {
+    padding: 20px;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+    background-color: #ffffff;
+    color: #333333;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    font-size: 1.7em;
+}
+
+.card-title {
+    font-weight: bold;
+    margin: 0;
+    color: #000000;
+    flex: 1;
+}
+
+.small-image {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+/* Icon Container */
+.icon-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-container .fa-bookmark {
+    font-size: 1.8em;
+    cursor: pointer;
+    color: black;
+    transition: transform 0.3s ease;
+}
+
+.icon-container .fa-bookmark:hover {
+    transform: scale(1.6);
+}
+
+.icon-container .fa-bookmark.bookmarked {
+    color: gold;
+}
+
+.icon-container .fa-thumbs-up {
+    color: black;
+    font-size: 1.8em;
+    margin: 0 50px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-container .fa-thumbs-up:hover {
+    transform: scale(1.6);
+}
+
+.icon-container .fa-thumbs-up.thumb-clicked {
+    transform: scale(1.5);
+    animation: like-bounce 0.3s ease;
+    color: #4caf50;
+}
+
+@keyframes like-bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-top: 1px solid #eeeeee;
+    padding: 20px 15px;
+    font-size: 1em;
+    color: #666666;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    min-height: 60px;
+}
+
+.footer-content {
+    text-align: left;
+    flex: 1;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.show-more {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.show-more:hover {
+    background-color: #0056b3;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.col {
+    padding: 0;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}

@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Mainscr from './mainscr';
 import SavedArticles from "./SavedArticles";
 import FavoriteSearches from "./FavoriteSearches";
+import RecommendedArticles from "./RecommendedArticles";
 import { FaHome } from 'react-icons/fa';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -202,6 +203,7 @@ function App() {
           <Route path="/App" element={<News />} />
           <Route path="/saved-articles" element={<SavedArticles />} />
           <Route path="/favorite-searches" element={<FavoriteSearches />} />
+          <Route path="/recommended-articles" element={<RecommendedArticles />} />
           <Route path="/" element={<Mainscr />} />
         </Routes>
       </Router>

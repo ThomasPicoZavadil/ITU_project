@@ -186,7 +186,13 @@ function Mainscr() {
                     ))}
                 </div>
 
-                <button className="button recommendation">Articles recommended for you</button>
+                <button
+                    className="button recommendation"
+                    onClick={() => navigate("/recommended-articles")}
+                >
+                    Recommended Articles for You
+                </button>
+
             </div>
 
             {/* Modal */}

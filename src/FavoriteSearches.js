@@ -6,10 +6,15 @@ import { useNavigate } from "react-router-dom";
 function FavoriteSearches() {
     const navigate = useNavigate();
 
-    const [userAddedItems, setUserAddedItems] = useState({
-        categories: [],
-        sources: [],
-        keywords: [],
+    const [userAddedItems, setUserAddedItems] = useState(() => {
+        const savedUserAddedItems = localStorage.getItem("userAddedItems");
+        return savedUserAddedItems
+            ? JSON.parse(savedUserAddedItems)
+            : {
+                categories: [],
+                sources: [],
+                keywords: [],
+            };
     });
 
     const [likedArticles, setLikedArticles] = useState(() => {
@@ -38,20 +43,28 @@ function FavoriteSearches() {
 
     const handleAddItem = (type) => {
         if (newItem.trim() !== "") {
-            setUserAddedItems((prev) => ({
-                ...prev,
-                [type]: [...prev[type], newItem.trim()],
-            }));
+            setUserAddedItems((prev) => {
+                const updatedItems = {
+                    ...prev,
+                    [type]: [...prev[type], newItem.trim()],
+                };
+                localStorage.setItem("userAddedItems", JSON.stringify(updatedItems)); // Save to localStorage
+                return updatedItems;
+            });
             setIsAdding((prev) => ({ ...prev, [type]: false }));
             setNewItem(""); // Reset the input field
         }
     };
 
     const handleRemoveUserItem = (type, index) => {
-        setUserAddedItems((prev) => ({
-            ...prev,
-            [type]: prev[type].filter((_, i) => i !== index),
-        }));
+        setUserAddedItems((prev) => {
+            const updatedItems = {
+                ...prev,
+                [type]: prev[type].filter((_, i) => i !== index),
+            };
+            localStorage.setItem("userAddedItems", JSON.stringify(updatedItems)); // Update localStorage
+            return updatedItems;
+        });
     };
 
     const handleRemoveLikedItem = (type, index) => {
@@ -64,6 +77,10 @@ function FavoriteSearches() {
     useEffect(() => {
         localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
     }, [likedArticles]);
+
+    useEffect(() => {
+        localStorage.setItem("userAddedItems", JSON.stringify(userAddedItems));
+    }, [userAddedItems]);
 
     return (
         <div className="favorite-searches">
@@ -113,6 +130,7 @@ function FavoriteSearches() {
                         </button>
                     )}
                 </div>
+                {/* Add "Based on your likes" section */}
                 <p>Based on your likes:</p>
                 <div className="based-on-likes">
                     {likedArticles.likedCategories.length > 0 ? (
