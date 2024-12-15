@@ -9,15 +9,15 @@ body {
     /* Keeps the gradient fixed while scrolling */
     color: #ffffff;
 }
-  
+
 .App {
     text-align: center;
 }
-  
+
 .App-header {
-    padding: 20px;
+    padding: 5px;
 }
-  
+
 .resultsfor {
     text-align: left;
     font-size: 3em;
@@ -26,7 +26,7 @@ body {
     color: black;
     /* Dark color for the text */
 }
-  
+
 /* Total results styling */
 .totalresults {
     text-align: left;
@@ -34,13 +34,13 @@ body {
     color: black;
     padding-top: 5px;
 }
-  
+
 .header-text {
     font-size: 1.2em;
     margin-bottom: 15px;
     color: #ffffff;
 }
-  
+
 /* Home Icon Styling */
 .home-icon {
     position: absolute;
@@ -51,16 +51,42 @@ body {
     z-index: 1000;
     transition: transform 0.2s ease;
 }
-  
+
 .home-icon:hover {
     color: #666666;
     transform: scale(1.1);
 }
-  
+
 .total-results {
     font-size: 1em;
     margin-bottom: 10px;
     color: #cccccc;
+}
+
+.show-groups-container {
+    display: flex;
+    justify-content: flex-start;
+    /* Align the button to the left */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    /* Add space below the button */
+}
+
+.show-groups-button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.7em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.show-groups-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 .no-results {
@@ -68,11 +94,11 @@ body {
     color: #666;
     margin-top: 50px;
 }
-  
+
 .container {
     padding: 20px;
 }
-  
+
 .card {
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -81,17 +107,17 @@ body {
     color: #333333;
     transition: transform 0.2s ease-in-out;
 }
-  
+
 .card:hover {
     transform: scale(1.02);
 }
-  
+
 .card-body {
     display: flex;
     align-items: center;
     padding: 15px;
 }
-  
+
 .card-title {
     font-size: 1.9em;
     font-weight: bold;
@@ -99,22 +125,24 @@ body {
     color: #000000;
     flex: 1;
 }
-  
+
 .small-image {
     max-width: 300px;
     max-height: 300px;
     border-radius: 4px;
     margin-left: 10px;
 }
-  
+
 /* Icon Container Styling */
 .icon-container {
     display: flex;
-    justify-content: flex-end; /* Align icons to the right */
+    justify-content: flex-end;
+    /* Align icons to the right */
     align-items: center;
-    gap: 15px; /* Space between icons */
+    gap: 15px;
+    /* Space between icons */
 }
-  
+
 .icon {
     width: 20px;
     /* Adjust size as needed */
@@ -123,17 +151,21 @@ body {
 
 /* Delete Icon Styling */
 .delete-icon {
-    font-size: 1.5em; /* Adjust icon size */
-    color: #d9534f; /* Red color for delete icon */
+    font-size: 1.5em;
+    /* Adjust icon size */
+    color: #d9534f;
+    /* Red color for delete icon */
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .delete-icon:hover {
-    transform: scale(1.2); /* Slightly enlarge on hover */
-    color: #c9302c; /* Darker red on hover */
+    transform: scale(1.2);
+    /* Slightly enlarge on hover */
+    color: #c9302c;
+    /* Darker red on hover */
 }
-  
+
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -147,13 +179,13 @@ body {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-  
+
 .footer-content {
     text-align: left;
     flex: 1;
     /* Takes up available space */
 }
-  
+
 .show-more {
     background-color: #007bff;
     color: #ffffff;
@@ -166,16 +198,16 @@ body {
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
-  
+
 .show-more:hover {
     background-color: #0056b3;
 }
-  
+
 /* Adjust spacing for rows and columns */
 .row {
     margin-bottom: 10px;
 }
-  
+
 .col {
     padding: 0;
 }

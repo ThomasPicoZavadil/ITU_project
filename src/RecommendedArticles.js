@@ -50,14 +50,14 @@ function RecommendedArticles() {
 
             for (const keyword of keywords) {
                 const response = await axios.get(
-                    `https://newsapi.org/v2/everything?q=${keyword}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5`
+                    `https://newsapi.org/v2/everything?q=${keyword}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10`
                 );
                 results.push(...response.data.articles);
             }
 
             for (const category of categories) {
                 const response = await axios.get(
-                    `https://newsapi.org/v2/everything?q=${category}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5`
+                    `https://newsapi.org/v2/everything?q=${category}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10`
                 );
                 results.push(...response.data.articles);
             }
@@ -65,7 +65,7 @@ function RecommendedArticles() {
             // Fetch articles for each source
             for (const source of sources) {
                 const response = await axios.get(
-                    `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5`
+                    `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10`
                 );
                 results.push(...response.data.articles);
             }

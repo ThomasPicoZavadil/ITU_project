@@ -11,6 +11,8 @@ import Mainscr from './mainscr';
 import SavedArticles from "./SavedArticles";
 import FavoriteSearches from "./FavoriteSearches";
 import RecommendedArticles from "./RecommendedArticles";
+import Groups from "./Groups";
+import GroupDetails from "./GroupDetails";
 import { FaHome } from 'react-icons/fa';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -24,6 +26,7 @@ function News() {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalResults, setTotalResults] = useState(0); // Store totalResults
+  const [page, setPage] = useState(1); // Current page for API calls
   const [bookmarks, setBookmarks] = useState(() => {
     // Load bookmarks from localStorage on initial render
     const savedBookmarks = localStorage.getItem("bookmarks");
@@ -46,19 +49,17 @@ function News() {
   const navigate = useNavigate(); // Hook to navigate between routes
 
   // Make API call to news api
-  async function getNewsData() {
+  const getNewsData = async (append = false) => {
     setLoading(true);
-
     try {
-      const resp = await axios.get(
-        `https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}&from=${params.from}&to=${params.to}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5`
+      const response = await axios.get(
+        `https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}&from=${params.from}&to=${params.to}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5&page=${page}`
       );
-      setNewsData(resp.data.articles);
-      setTotalResults(resp.data.totalResults); // Extract and store totalResults
+      setNewsData((prev) => (append ? [...prev, ...response.data.articles] : response.data.articles));
+      setTotalResults(response.data.totalResults);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-
     setLoading(false);
   }
 
@@ -74,6 +75,14 @@ function News() {
   useEffect(() => {
     localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
   }, [likedArticles]);
+
+  const handleShowMore = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    if (page > 1) getNewsData(true);
+  }, [page]);
 
   const handleBookmark = (article) => {
     // Check if article is already bookmarked
@@ -94,7 +103,7 @@ function News() {
   const handleLikeArticle = (article) => {
     const articleInfo = {
       keyword: params.keyword || "Unknown Keyword", // Use the current search keyword
-      category: params.language || "General", // Use the current language as category
+      category: article.category || "General", // Use the article's category
       source: article.source?.name || "Unknown Source", // Use the article's source
     };
 
@@ -180,7 +189,11 @@ function News() {
                 </Col>
               </Row>
             ))}
-            <button className="button show-more">Show more</button>
+            {!loading && newsData.length < totalResults && (
+              <button className="button show-more" onClick={handleShowMore}>
+                Show more
+              </button>
+            )}
           </Container>
         )}
       </header>
@@ -204,6 +217,8 @@ function App() {
           <Route path="/saved-articles" element={<SavedArticles />} />
           <Route path="/favorite-searches" element={<FavoriteSearches />} />
           <Route path="/recommended-articles" element={<RecommendedArticles />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/group/:groupId" element={<GroupDetails />} />
           <Route path="/" element={<Mainscr />} />
         </Routes>
       </Router>

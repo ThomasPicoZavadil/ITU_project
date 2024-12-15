@@ -36,11 +36,6 @@ function Mainscr() {
         navigate("/App");
     };
 
-    const clearLikedArticles = () => {
-        localStorage.removeItem("likedArticles");
-        alert("Liked articles have been cleared.");
-    };
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setQuickSearch((prev) => ({
@@ -48,6 +43,20 @@ function Mainscr() {
             [name]: value,
         }));
     };
+
+    // Date-specific input handling for the modal quick search
+    const handleDateInputChange = (name, value) => {
+        setQuickSearch((prev) => ({
+            ...prev,
+            [name]: value ? new Date(value).toISOString().split("T")[0] : "",
+        }));
+    };
+
+    // Handle date formatting for quick search display
+    const formatDate = (date) => {
+        return date ? new Date(date).toLocaleDateString("en-GB") : "Any date";
+    };
+
 
     const handleSaveQuickSearch = () => {
         // Add the current quicksearch data to the list
@@ -158,9 +167,6 @@ function Mainscr() {
                 <button className="button search-button" onClick={handleSearch}>
                     Search
                 </button>
-                <button className="button clear-liked-button" onClick={clearLikedArticles}>
-                    Clear Liked Articles
-                </button>
                 <button className="button add-button" onClick={() => setIsModalOpen(true)}>
                     Add quicksearch option +
                 </button>
@@ -173,16 +179,22 @@ function Mainscr() {
                                 className="button quicksearch-button"
                                 onClick={() => handleQuickSearchClick(search)}
                             >
-                                {search.keyword || "All Keywords"} - {search.country || "All Countries"} - {search.language || "All Languages"}
-                            </button>
-                            <button
-                                className="button delete-button"
-                                onClick={() => handleDeleteQuickSearch(index)}
-                                title="Delete this quicksearch"
-                            >
-                                ✖
+                                <span className="quicksearch-text">
+                                    {search.keyword || "All Keywords"} - {search.language || "All Languages"} - {formatDate(search.from)} to {formatDate(search.to)}
+                                </span>
+                                <span
+                                    className="quicksearch-delete"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering the search action
+                                        handleDeleteQuickSearch(index);
+                                    }}
+                                    title="Delete this quicksearch"
+                                >
+                                    ✖
+                                </span>
                             </button>
                         </div>
+
                     ))}
                 </div>
 
@@ -231,18 +243,18 @@ function Mainscr() {
                             <option value="zh">Chinese</option>
                         </select>
                         <input
-                            type="text"
-                            name="language"
-                            placeholder="Language"
-                            value={quickSearch.language}
-                            onChange={handleInputChange}
+                            type="date"
+                            name="from"
+                            placeholder="From:"
+                            value={quickSearch.from || ""}
+                            onChange={(e) => handleDateInputChange("from", e.target.value)}
                         />
                         <input
-                            type="text"
-                            name="source"
-                            placeholder="Source"
-                            value={quickSearch.source}
-                            onChange={handleInputChange}
+                            type="date"
+                            name="to"
+                            placeholder="To:"
+                            value={quickSearch.to || ""}
+                            onChange={(e) => handleDateInputChange("to", e.target.value)}
                         />
                         <div className="modal-actions">
                             <button className="button save-button" onClick={handleSaveQuickSearch}>

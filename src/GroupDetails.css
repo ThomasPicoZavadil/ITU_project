@@ -1,0 +1,138 @@
+/* General container styling */
+.group-details-container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #e0f7fa, #0091d4);
+    background-attachment: fixed;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    /* Ensure absolute children are anchored */
+}
+
+.group-details-header {
+    padding: 20px;
+    text-align: left;
+}
+
+.group-details-header h1 {
+    margin: 10px 0;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: black;
+}
+
+.group-details-header p {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Container for navigation icons */
+.group-details-icon-container {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Back icon styling */
+.group-details-back-icon {
+    cursor: pointer;
+    color: black;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.group-details-back-icon:hover {
+    color: #666666;
+    transform: scale(1.1);
+}
+
+/* Home icon styling */
+.group-details-home-icon {
+    cursor: pointer;
+    color: black;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.group-details-home-icon:hover {
+    color: #666666;
+    transform: scale(1.1);
+}
+
+/* Card styling */
+.group-details-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.group-details-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+    background-color: #ffffff;
+    color: #333333;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    font-size: 1.7em;
+}
+
+.card-title {
+    font-weight: bold;
+    margin: 0;
+    color: #000000;
+    flex: 1;
+}
+
+.small-image {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+/* Card footer styling */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-top: 1px solid #eeeeee;
+    padding: 20px 15px;
+    font-size: 1em;
+    color: #666666;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    min-height: 60px;
+}
+
+.footer-content {
+    text-align: left;
+    flex: 1;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+/* Adjust spacing for rows and columns */
+.row {
+    margin-bottom: 10px;
+}
+
+.col {
+    padding: 0;
+}

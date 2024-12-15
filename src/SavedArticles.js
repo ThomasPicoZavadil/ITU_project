@@ -35,6 +35,11 @@ function SavedArticles() {
                 </div>
                 <Container>
                     <h1 className="resultsfor">Saved Articles</h1>
+                    <div className="show-groups-container">
+                        <button className="show-groups-button" onClick={() => navigate("/groups")}>
+                            Show Groups
+                        </button>
+                    </div>
                     {savedArticles.length === 0 ? (
                         <p className="no-results">No saved articles found.</p>
                     ) : (
