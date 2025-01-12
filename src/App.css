@@ -1,4 +1,7 @@
-/* App.css */
+/*****************
+Soubor App.css
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
 
 body {
   font-family: Arial, sans-serif;
@@ -6,7 +9,6 @@ body {
   padding: 0;
   background: linear-gradient(to bottom, #e0f7fa, #0091d4);
   background-attachment: fixed;
-  /* Keeps the gradient fixed while scrolling */
   color: #ffffff;
 }
 
@@ -21,13 +23,10 @@ body {
 .resultsfor {
   text-align: left;
   font-size: 3em;
-  /* Adjust font size to make it bold but not too large */
   font-weight: bold;
   color: black;
-  /* Dark color for the text */
 }
 
-/* Total results styling */
 .totalresults {
   text-align: left;
   font-size: 2em;
@@ -41,7 +40,6 @@ body {
   color: #ffffff;
 }
 
-/* Home Icon Styling */
 .home-icon {
   position: absolute;
   top: 20px;
@@ -101,18 +99,15 @@ body {
   margin-left: 10px;
 }
 
-/* Icon Container */
 .icon-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* Space between icons */
   gap: 15px;
 }
 
 .icon {
   width: 20px;
-  /* Adjust size as needed */
   height: 20px;
 }
 
@@ -125,37 +120,29 @@ body {
 
 .icon-container .fa-bookmark:hover {
   transform: scale(1.6);
-  /* Slightly enlarge on hover */
 }
 
 .icon-container .fa-bookmark.bookmarked {
   color: gold;
-  /* Highlight bookmarked articles */
 }
 
 .icon-container .fa-thumbs-up {
   color: black;
-  /* Icon color */
   font-size: 1.8em;
-  /* Adjust icon size */
   margin: 0 50px;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .icon-container .fa-thumbs-up:hover {
   transform: scale(1.6);
-  /* Slightly enlarge on hover */
 }
 
 .icon-container .fa-thumbs-up.thumb-clicked {
   transform: scale(1.5);
   animation: like-bounce 0.3s ease;
-  /* Enlarges the icon briefly */
   color: #4caf50;
-  /* Turns green */
 }
 
-/* Keyframes for the bounce effect */
 @keyframes like-bounce {
   0% {
     transform: scale(1);
@@ -177,25 +164,18 @@ body {
   background-color: #f1f1f1;
   border-top: 1px solid #eeeeee;
   padding: 20px 15px;
-  /* Increase padding for a larger footer */
   font-size: 1em;
-  /* Adjust font size if necessary */
   color: #666666;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   min-height: 60px;
-  /* Set a minimum height for consistency */
 }
 
-/* Footer Content */
 .footer-content {
   text-align: left;
   flex: 1;
-  /* Take up available space */
   font-size: 1.2em;
-  /* Adjust font size for better readability */
   line-height: 1.5;
-  /* Increase line height for better spacing */
 }
 
 .show-more {
@@ -215,7 +195,6 @@ body {
   background-color: #0056b3;
 }
 
-/* Adjust spacing for rows and columns */
 .row {
   margin-bottom: 10px;
 }
@@ -224,7 +203,6 @@ body {
   padding: 0;
 }
 
-/* Remove underline for links */
 .card-link {
   text-decoration: none;
   color: inherit;

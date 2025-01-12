@@ -1,3 +1,8 @@
+/*****************
+Soubor GroupDetails.js pro stránku pro zobrazení článků ve skupině
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 import React from "react";
 import "./GroupDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
@@ -8,13 +13,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function GroupDetails() {
-    const { groupId } = useParams();
-    const navigate = useNavigate();
+    const { groupId } = useParams(); // Získání ID skupiny z URL parametrů
+    const navigate = useNavigate(); // Pro navigaci mezi stránkami
 
-    // Load group data from localStorage
+    // Načtení dat skupin z localStorage
     const groups = JSON.parse(localStorage.getItem("articleGroups")) || [];
-    const group = groups[groupId];
+    const group = groups[groupId]; // Získání konkrétní skupiny na základě ID
 
+    // Pokud skupina neexistuje, zobrazí zprávu
     if (!group) {
         return (
             <div className="group-details-container">

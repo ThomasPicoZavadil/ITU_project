@@ -1,4 +1,8 @@
-/* General container styling */
+/*****************
+Soubor GroupDetails.css
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 .group-details-container {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,7 +12,6 @@
     color: #ffffff;
     text-align: center;
     position: relative;
-    /* Ensure absolute children are anchored */
 }
 
 .group-details-header {
@@ -28,7 +31,6 @@
     color: #333;
 }
 
-/* Container for navigation icons */
 .group-details-icon-container {
     display: flex;
     gap: 20px;
@@ -37,7 +39,6 @@
     right: 20px;
 }
 
-/* Back icon styling */
 .group-details-back-icon {
     cursor: pointer;
     color: black;
@@ -49,7 +50,6 @@
     transform: scale(1.1);
 }
 
-/* Home icon styling */
 .group-details-home-icon {
     cursor: pointer;
     color: black;
@@ -61,7 +61,6 @@
     transform: scale(1.1);
 }
 
-/* Card styling */
 .group-details-card-link {
     text-decoration: none;
     color: inherit;
@@ -106,7 +105,6 @@
     margin-left: 10px;
 }
 
-/* Card footer styling */
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -128,7 +126,6 @@
     line-height: 1.5;
 }
 
-/* Adjust spacing for rows and columns */
 .row {
     margin-bottom: 10px;
 }

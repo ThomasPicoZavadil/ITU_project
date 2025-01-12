@@ -1,3 +1,9 @@
+/*****************
+Soubor App.js pro stránku zobrazující články
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
+
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState, useContext, createContext } from 'react';
@@ -16,24 +22,24 @@ import GroupDetails from "./GroupDetails";
 import { FaHome } from 'react-icons/fa';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-// Create the context
+// Vytvoření kontextu pro sdílení parametrů mezi komponentami
 export const ParamContext = createContext({
   params: { keyword: "", language: "", country: "", from: "", to: "" },
   setParams: () => { }
 });
 
 function News() {
-  const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [totalResults, setTotalResults] = useState(0); // Store totalResults
-  const [page, setPage] = useState(1); // Current page for API calls
+  const [newsData, setNewsData] = useState([]); // Stav pro ukládání dat o novinkách
+  const [loading, setLoading] = useState(false); // Stav načítání
+  const [totalResults, setTotalResults] = useState(0); // Celkový počet výsledků z API
+  const [page, setPage] = useState(1); // Aktuální stránka pro volání API
   const [bookmarks, setBookmarks] = useState(() => {
-    // Load bookmarks from localStorage on initial render
+    // Načtení záložek z localStorage při inicializaci
     const savedBookmarks = localStorage.getItem("bookmarks");
     return savedBookmarks ? JSON.parse(savedBookmarks) : [];
   });
   const [likedArticles, setLikedArticles] = useState(() => {
-    // Load from localStorage or initialize with the default structure
+    // Načtení oblíbených článků z localStorage nebo inicializace výchozí strukturou
     const savedLikes = localStorage.getItem("likedArticles");
     return savedLikes
       ? JSON.parse(savedLikes)
@@ -45,91 +51,95 @@ function News() {
   });
 
 
-  const { params } = useContext(ParamContext); // Access params from context
-  const navigate = useNavigate(); // Hook to navigate between routes
+  const { params } = useContext(ParamContext); // Přístup k parametrům z kontextu
+  const navigate = useNavigate(); // Hook pro navigaci mezi stránkami
 
-  // Make API call to news api
+  // Funkce pro získání dat z API
   const getNewsData = async (append = false) => {
-    setLoading(true);
+    setLoading(true); // Nastavení stavu načítání
     try {
       const response = await axios.get(
         `https://newsapi.org/v2/everything?q=${params.keyword}&language=${params.language}&from=${params.from}&to=${params.to}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=5&page=${page}`
       );
       setNewsData((prev) => (append ? [...prev, ...response.data.articles] : response.data.articles));
-      setTotalResults(response.data.totalResults);
+      setTotalResults(response.data.totalResults);  // Nastavení celkového počtu výsledků
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    setLoading(false);
+    setLoading(false);  // Ukončení stavu načítání
   }
 
+  // Načtení dat při změně parametrů vyhledávání
   useEffect(() => {
     if (params.keyword || params.language) getNewsData();
   }, [params.keyword, params.language]);
 
-  // Save bookmarks to localStorage whenever they change
+  // Uložení záložek do localStorage při každé změně
   useEffect(() => {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }, [bookmarks]);
 
+  // Uložení oblíbených článků do localStorage při každé změně
   useEffect(() => {
     localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
   }, [likedArticles]);
 
+  // Funkce pro zobrazení více článků
   const handleShowMore = () => {
     setPage((prev) => prev + 1);
   };
 
+  // Načtení dalších článků při změně stránky
   useEffect(() => {
-    if (page > 1) getNewsData(true);
+    if (page > 1) getNewsData(true);  // Přidání nových článků k již existujícím
   }, [page]);
 
+  // Funkce pro přidání nebo odstranění článku ze záložek
   const handleBookmark = (article) => {
-    // Check if article is already bookmarked
-    const isBookmarked = bookmarks.some((b) => b.url === article.url);
+    const isBookmarked = bookmarks.some((b) => b.url === article.url); // Kontrola, zda je článek již v záložkách
     if (isBookmarked) {
-      // Remove bookmark
-      setBookmarks(bookmarks.filter((b) => b.url !== article.url));
+      setBookmarks(bookmarks.filter((b) => b.url !== article.url)); // Odstranění ze záložek
     } else {
-      // Add bookmark
-      setBookmarks([...bookmarks, article]);
+      setBookmarks([...bookmarks, article]); // Přidání do záložek
     }
   };
 
+  // Funkce pro kontrolu, zda je článek v záložkách
   const isBookmarked = (article) => {
     return bookmarks.some((b) => b.url === article.url);
   };
 
+  // Funkce pro přidání článku mezi oblíbené
   const handleLikeArticle = (article) => {
     const articleInfo = {
-      keyword: params.keyword || "Unknown Keyword", // Use the current search keyword
-      category: article.category || "General", // Use the article's category
-      source: article.source?.name || "Unknown Source", // Use the article's source
+      keyword: params.keyword || "Unknown Keyword", // Použití aktuálního klíčového slova
+      category: article.category || "General", // Použití kategorie článku
+      source: article.source?.name || "Unknown Source", // Použití zdroje článku
     };
 
     setLikedArticles((prev) => {
-      // Create a copy of the existing structure
-      const updatedLikedArticles = { ...prev };
+      const updatedLikedArticles = { ...prev }; // Kopírování existující struktury
 
-      // Add the keyword if it doesn't already exist
+      // Přidání klíčového slova, pokud ještě neexistuje
       if (!updatedLikedArticles.likedKeywords.includes(articleInfo.keyword)) {
         updatedLikedArticles.likedKeywords.push(articleInfo.keyword);
       }
 
-      // Add the category if it doesn't already exist
+      // Přidání kategorie, pokud ještě neexistuje
       if (!updatedLikedArticles.likedCategories.includes(articleInfo.category)) {
         updatedLikedArticles.likedCategories.push(articleInfo.category);
       }
 
-      // Add the source if it doesn't already exist
+      // Přidání zdroje, pokud ještě neexistuje
       if (!updatedLikedArticles.likedSources.includes(articleInfo.source)) {
         updatedLikedArticles.likedSources.push(articleInfo.source);
       }
 
-      return updatedLikedArticles; // Return the updated structure
+      return updatedLikedArticles; // Vrácení aktualizované struktury
     });
   };
 
+  // Animace pro tlačítko "To se mi líbí"
   const handleThumbClick = (e) => {
     const target = e.currentTarget;
     target.classList.add("thumb-clicked");
@@ -168,7 +178,7 @@ function News() {
                           <i
                             className={`fas fa-bookmark ${isBookmarked(article) ? "bookmarked" : ""}`}
                             onClick={(e) => {
-                              e.preventDefault(); // Prevent navigation when clicking the icon
+                              e.preventDefault();
                               handleBookmark(article);
                             }}
                             title={isBookmarked(article) ? "Remove Bookmark" : "Add Bookmark"}
@@ -176,9 +186,9 @@ function News() {
                           <i
                             className="fas fa-thumbs-up"
                             onClick={(e) => {
-                              e.preventDefault(); // Prevent default action
-                              handleThumbClick(e); // Add animation
-                              handleLikeArticle(article); // Add to likedArticles
+                              e.preventDefault();
+                              handleThumbClick(e);
+                              handleLikeArticle(article);
                             }}
                             title="Like this article"
                           ></i>
@@ -201,7 +211,6 @@ function News() {
   );
 }
 
-// Create a provider component
 export const ParamProvider = ({ children }) => {
   const [params, setParams] = useState({ keyword: "", language: "", country: "", from: "", to: "" });
 

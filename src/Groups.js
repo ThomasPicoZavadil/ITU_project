@@ -1,31 +1,43 @@
+/*****************
+Soubor Groups.js pro stránku pro vytváření skupin uložených článků
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 import React, { useState, useEffect } from "react";
 import "./Groups.css";
 import { FaHome, FaPlus, FaTrashAlt, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function Groups() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Navigace mezi stránkami
+
+    // Stav pro skupiny, načítá data z localStorage
     const [groups, setGroups] = useState(() => {
         const savedGroups = localStorage.getItem("articleGroups");
         return savedGroups ? JSON.parse(savedGroups) : [];
     });
+
+    // Stav pro uložené články, načítá data z localStorage
     const [savedArticles, setSavedArticles] = useState(() => {
         const saved = localStorage.getItem("bookmarks");
         return saved ? JSON.parse(saved) : [];
     });
-    const [isCreating, setIsCreating] = useState(false);
-    const [newGroupName, setNewGroupName] = useState("");
-    const [selectedGroupIndex, setSelectedGroupIndex] = useState(null); // Track group to manage articles
 
+    const [isCreating, setIsCreating] = useState(false); // Sleduje, zda uživatel vytváří novou skupinu
+    const [newGroupName, setNewGroupName] = useState(""); // Název nové skupiny
+    const [selectedGroupIndex, setSelectedGroupIndex] = useState(null); // Index aktuálně vybrané skupiny pro správu článků
+
+    // Aktualizace localStorage při změně skupin
     useEffect(() => {
         localStorage.setItem("articleGroups", JSON.stringify(groups));
     }, [groups]);
 
+    // Aktualizace localStorage při změně uložených článků
     useEffect(() => {
         localStorage.setItem("bookmarks", JSON.stringify(savedArticles));
     }, [savedArticles]);
 
-    // Cleanup group articles when savedArticles changes
+    // Čištění skupin, odstraňuje články, které již nejsou v uložených článcích
     useEffect(() => {
         setGroups((prevGroups) =>
             prevGroups.map((group) => ({
@@ -37,7 +49,7 @@ function Groups() {
         );
     }, [savedArticles]);
 
-    // Handle creating a new group
+    // Vytváří novou skupinu
     const handleCreateGroup = () => {
         if (newGroupName.trim() !== "") {
             const newGroup = { name: newGroupName.trim(), articles: [] };
@@ -47,11 +59,11 @@ function Groups() {
         }
     };
 
-    // Handle deleting a group
+    // Odstranění skupiny
     const handleDeleteGroup = (index) => {
         setGroups((prev) => {
             const updatedGroups = prev.filter((_, i) => i !== index);
-            // If the deleted group is currently selected, close the selection
+            // Zavře správu článků, pokud je aktuální skupina smazána
             if (selectedGroupIndex === index) {
                 setSelectedGroupIndex(null);
             }
@@ -59,24 +71,24 @@ function Groups() {
         });
     };
 
-    // Add or remove an article from a group
+    // Přidání nebo odebrání článku ve skupině
     const toggleArticleInGroup = (article) => {
         if (selectedGroupIndex !== null && groups[selectedGroupIndex]) {
             setGroups((prevGroups) => {
                 const updatedGroups = prevGroups.map((group, index) => {
                     if (index !== selectedGroupIndex) return group;
 
-                    // Check if the article is already in the group
+                    // Kontrola, zda je článek již ve skupině
                     const articleIndex = group.articles.findIndex((a) => a.url === article.url);
                     if (articleIndex === -1) {
                         return {
                             ...group,
-                            articles: [...group.articles, article], // Add article
+                            articles: [...group.articles, article], // Přidání článku
                         };
                     } else {
                         return {
                             ...group,
-                            articles: group.articles.filter((a) => a.url !== article.url), // Remove article
+                            articles: group.articles.filter((a) => a.url !== article.url), // Odebrání článku
                         };
                     }
                 });
@@ -86,15 +98,18 @@ function Groups() {
         }
     };
 
+    // Kontrola, zda je článek ve vybrané skupině
     const isArticleInGroup = (article) => {
         if (selectedGroupIndex === null || !groups[selectedGroupIndex]) return false;
         return groups[selectedGroupIndex].articles.some((a) => a.url === article.url);
     };
 
+    // Navigace na detail skupiny
     const handleViewGroup = (index) => {
         navigate(`/group/${index}`);
     };
 
+    // Filtrování článků, které stále existují v uložených článcích
     const getFilteredGroupArticles = (group) => {
         return group.articles.filter((groupArticle) =>
             savedArticles.some((savedArticle) => savedArticle.url === groupArticle.url)

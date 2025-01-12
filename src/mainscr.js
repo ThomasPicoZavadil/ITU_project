@@ -1,3 +1,8 @@
+/*****************
+Soubor mainscr.js pro hlavní stránku aplikace
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 import React, { useState, useEffect, useContext } from "react";
 import "./mainscr.css";
 import { FiMenu } from "react-icons/fi";
@@ -9,24 +14,32 @@ function Mainscr() {
     const navigate = useNavigate();
     const { params, setParams } = useContext(ParamContext);
 
-    const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+    // Stav pro otevření nebo zavření modálního okna
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Stav pro otevření nebo zavření bočního panelu
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    // Načtení seznamu rychlého vyhledávání z localStorage při inicializaci
     const [quickSearchList, setQuickSearchList] = useState(() => {
-        // Load initial state from localStorage
         const savedQuickSearches = localStorage.getItem("quickSearchList");
         return savedQuickSearches ? JSON.parse(savedQuickSearches) : [];
-    }); // List of saved quicksearch options
+    });
+
+    // Data aktuálního rychlého vyhledávání
     const [quickSearch, setQuickSearch] = useState({ keyword: "", country: "", language: "", source: "" }); // Current quicksearch data
 
-    // Save quicksearches to localStorage whenever the list changes
+    // Uložení seznamu rychlého vyhledávání do localStorage při každé změně
     useEffect(() => {
         localStorage.setItem("quickSearchList", JSON.stringify(quickSearchList));
     }, [quickSearchList]);
 
+    // Funkce pro zpracování změn ve vyhledávacích polích
     const handleChange = (name, e) => {
         setParams((prev) => ({ ...prev, [name]: e.target.value }));
     };
 
+    // Funkce pro spuštění vyhledávání a přesměrování na stránku výsledků
     const handleSearch = () => {
         console.log("Keyword:", params.keyword);
         console.log("Language:", params.language);
@@ -36,6 +49,7 @@ function Mainscr() {
         navigate("/App");
     };
 
+    // Funkce pro zpracování vstupu v modálním okně
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setQuickSearch((prev) => ({
@@ -44,7 +58,7 @@ function Mainscr() {
         }));
     };
 
-    // Date-specific input handling for the modal quick search
+    // Zpracování dat specifických pro datum
     const handleDateInputChange = (name, value) => {
         setQuickSearch((prev) => ({
             ...prev,
@@ -52,24 +66,26 @@ function Mainscr() {
         }));
     };
 
-    // Handle date formatting for quick search display
+    // Formátování dat pro zobrazení v rychlém vyhledávání
     const formatDate = (date) => {
         return date ? new Date(date).toLocaleDateString("en-GB") : "Any date";
     };
 
 
     const handleSaveQuickSearch = () => {
-        // Add the current quicksearch data to the list
+        // Uložení nového rychlého vyhledávání
         setQuickSearchList((prevList) => [...prevList, quickSearch]);
-        setIsModalOpen(false); // Close the modal after saving
-        setQuickSearch({ keyword: "", country: "", language: "", source: "" }); // Reset quicksearch data
+        setIsModalOpen(false); // Zavření modálního okna
+        setQuickSearch({ keyword: "", country: "", language: "", source: "" }); // Reset aktuálního vyhledávání
     };
 
+    // Kliknutí na tlačítko rychlého vyhledávání
     const handleQuickSearchClick = (search) => {
-        setParams(search); // Set the parameters
-        navigate("/App"); // Trigger search navigation immediately
+        setParams(search); // Nastavení parametrů
+        navigate("/App"); // Přesměrování na stránku vyhledávání
     };
 
+    // Odstranění rychlého vyhledávání ze seznamu
     const handleDeleteQuickSearch = (index) => {
         setQuickSearchList((prevList) => prevList.filter((_, i) => i !== index));
     };

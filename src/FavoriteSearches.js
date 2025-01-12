@@ -1,3 +1,8 @@
+/*****************
+Soubor FavoriteSearches.js pro stránku pro upravování preferencí
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 import React, { useState, useEffect } from "react";
 import "./FavoriteSearches.css";
 import { FaHome, FaTrashAlt, FaPlus } from "react-icons/fa";
@@ -6,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function FavoriteSearches() {
     const navigate = useNavigate();
 
+    // Stav pro uživatelem přidané položky, načítání z localStorage
     const [userAddedItems, setUserAddedItems] = useState(() => {
         const savedUserAddedItems = localStorage.getItem("userAddedItems");
         return savedUserAddedItems
@@ -17,6 +23,7 @@ function FavoriteSearches() {
             };
     });
 
+    // Stav pro oblíbené články, načítání z localStorage
     const [likedArticles, setLikedArticles] = useState(() => {
         const savedLikes = localStorage.getItem("likedArticles");
         return savedLikes
@@ -28,19 +35,22 @@ function FavoriteSearches() {
             };
     });
 
+    // Stav pro sledování, zda uživatel přidává novou položku
     const [isAdding, setIsAdding] = useState({
         categories: false,
         sources: false,
         keywords: false,
     });
 
-    const [newItem, setNewItem] = useState(""); // Holds the text for the new item
+    const [newItem, setNewItem] = useState(""); // Stav pro text nové položky
 
+    // Funkce pro zahájení přidávání nové položky
     const handleStartAdding = (type) => {
         setIsAdding((prev) => ({ ...prev, [type]: true }));
-        setNewItem(""); // Reset the input field
+        setNewItem(""); // Resetování vstupu
     };
 
+    // Funkce pro přidání nové položky do uživatelských dat
     const handleAddItem = (type) => {
         if (newItem.trim() !== "") {
             setUserAddedItems((prev) => {
@@ -48,25 +58,27 @@ function FavoriteSearches() {
                     ...prev,
                     [type]: [...prev[type], newItem.trim()],
                 };
-                localStorage.setItem("userAddedItems", JSON.stringify(updatedItems)); // Save to localStorage
+                localStorage.setItem("userAddedItems", JSON.stringify(updatedItems)); // Uložení do localStorage
                 return updatedItems;
             });
             setIsAdding((prev) => ({ ...prev, [type]: false }));
-            setNewItem(""); // Reset the input field
+            setNewItem(""); // Resetování vstupu
         }
     };
 
+    // Funkce pro odebrání položky z uživatelských dat
     const handleRemoveUserItem = (type, index) => {
         setUserAddedItems((prev) => {
             const updatedItems = {
                 ...prev,
                 [type]: prev[type].filter((_, i) => i !== index),
             };
-            localStorage.setItem("userAddedItems", JSON.stringify(updatedItems)); // Update localStorage
+            localStorage.setItem("userAddedItems", JSON.stringify(updatedItems)); // Aktualizace v localStorage
             return updatedItems;
         });
     };
 
+    // Funkce pro odebrání položky z oblíbených článků
     const handleRemoveLikedItem = (type, index) => {
         setLikedArticles((prev) => ({
             ...prev,
@@ -74,10 +86,12 @@ function FavoriteSearches() {
         }));
     };
 
+    // Uložení oblíbených článků do localStorage při změně
     useEffect(() => {
         localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
     }, [likedArticles]);
 
+    // Uložení uživatelem přidaných položek do localStorage při změně
     useEffect(() => {
         localStorage.setItem("userAddedItems", JSON.stringify(userAddedItems));
     }, [userAddedItems]);
@@ -94,7 +108,6 @@ function FavoriteSearches() {
                 <h1>Favorite Searches</h1>
             </header>
 
-            {/* Favorite Categories */}
             <div className="section">
                 <h2>Favorite Categories</h2>
                 <div className="items-container">
@@ -130,7 +143,6 @@ function FavoriteSearches() {
                         </button>
                     )}
                 </div>
-                {/* Add "Based on your likes" section */}
                 <p>Based on your likes:</p>
                 <div className="based-on-likes">
                     {likedArticles.likedCategories.length > 0 ? (
@@ -150,7 +162,6 @@ function FavoriteSearches() {
                 </div>
             </div>
 
-            {/* Repeat similar structure for Favorite Sources and Keywords */}
             <div className="section">
                 <h2>Favorite Sources</h2>
                 <div className="items-container">
@@ -205,7 +216,6 @@ function FavoriteSearches() {
                 </div>
             </div>
 
-            {/* Repeat similar structure for Keywords */}
             <div className="section">
                 <h2>Favorite Keywords</h2>
                 <div className="items-container">

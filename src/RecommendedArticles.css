@@ -1,4 +1,7 @@
-/* RecommendedArticles.css */
+/*****************
+Soubor RecommendedArticles.css
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
 
 body {
     font-family: Arial, sans-serif;
@@ -6,7 +9,6 @@ body {
     padding: 0;
     background: linear-gradient(to bottom, #e0f7fa, #0091d4);
     background-attachment: fixed;
-    /* Keeps the gradient fixed while scrolling */
     color: #ffffff;
 }
 
@@ -22,10 +24,8 @@ body {
     font-size: 3em;
     font-weight: bold;
     color: black;
-    /* Dark color for the text */
 }
 
-/* Home Icon Styling */
 .home-icon {
     position: absolute;
     top: 20px;
@@ -79,7 +79,6 @@ body {
     margin-left: 10px;
 }
 
-/* Icon Container */
 .icon-container {
     display: flex;
     justify-content: flex-end;

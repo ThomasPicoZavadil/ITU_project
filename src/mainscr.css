@@ -1,4 +1,8 @@
-/* Reset default styling */
+/*****************
+Soubor mainscr.css
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +15,6 @@ html {
     font-family: Arial, sans-serif;
 }
 
-/* Background gradient */
 .mainscr {
     background: linear-gradient(to bottom, #e0f7fa, #0091d4);
     height: 100vh;
@@ -23,7 +26,6 @@ html {
     position: relative;
 }
 
-/* Menu icon */
 .menu {
     position: absolute;
     top: 20px;
@@ -37,7 +39,6 @@ html {
     flex-direction: column;
 }
 
-/* Title and subtitle styling */
 .title {
     font-size: 8em;
     font-weight: bold;
@@ -54,7 +55,6 @@ html {
     padding-bottom: 150px;
 }
 
-/* Search container styling */
 .search-container {
     margin-top: -100px;
     display: flex;
@@ -69,12 +69,9 @@ html {
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 200px;
-    /* Fixed width to ensure consistent size */
     box-sizing: border-box;
-    /* Include padding and border in width calculation */
 }
 
-/* Button styling */
 .button {
     padding: 10px 20px;
     font-size: 1em;
@@ -101,7 +98,6 @@ html {
     margin-top: 15px;
 }
 
-/* Modal Overlay */
 .modal {
     position: fixed;
     top: 0;
@@ -109,14 +105,12 @@ html {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-/* Modal Content */
 .modal-content {
     background: #fff;
     padding: 20px;
@@ -128,7 +122,6 @@ html {
     gap: 10px;
 }
 
-/* Input Styling */
 .modal-content input {
     padding: 10px;
     font-size: 1em;
@@ -143,13 +136,11 @@ html {
     border-radius: 5px;
 }
 
-/* Modal Actions */
 .modal-actions {
     display: flex;
     justify-content: space-between;
 }
 
-/* Buttons */
 .save-button {
     background-color: #007bff;
     color: white;
@@ -235,11 +226,9 @@ html {
     background-color: #d3d3d3;
 }
 
-/* Sidebar Styling */
 .sidebar {
     position: fixed;
     top: 0;
-    /* Initially hidden */
     right: -500px;
     width: 500px;
     height: 100%;
@@ -249,18 +238,14 @@ html {
     flex-direction: column;
     padding: 20px;
     transition: right 0.3s ease;
-    /* Smooth slide-in effect */
     z-index: 1000;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    /* Subtle shadow for depth */
 }
 
 .sidebar.open {
     right: 0;
-    /* Slide in when open */
 }
 
-/* Close Button Styling */
 .sidebar .close-btn {
     background: none;
     border: none;
@@ -275,10 +260,8 @@ html {
 
 .sidebar .close-btn:hover {
     color: #888;
-    /* Hover effect for close button */
 }
 
-/* Sidebar Items */
 .sidebar ul {
     padding: 0;
     margin: 0;
@@ -289,49 +272,37 @@ html {
 .sidebar ul li {
     display: flex;
     justify-content: space-between;
-    /* Space between text and icon */
     align-items: center;
     padding: 15px 20px;
-    /* Keep container padding intact */
     font-size: 2.5em;
     font-weight: bold;
     color: white;
     cursor: pointer;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
-    /* Divider between items */
     transition: background-color 0.3s ease, color 0.3s ease;
     gap: 10px;
-    /* Adjust gap between text and icon */
 }
 
 .sidebar ul li:hover {
     background-color: #333;
-    /* Darker background on hover */
     color: #f1c40f;
-    /* Highlight text color */
 }
 
-/* Sidebar Icons */
 .sidebar ul li .icon {
     width: 40px;
     height: 40px;
     margin-left: 5px;
-    /* Reduce margin between icon and text */
     color: white;
-    /* White color for icons */
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .sidebar ul li:hover .icon {
     transform: scale(1.2);
-    /* Slightly enlarge icon on hover */
     color: #f1c40f;
-    /* Highlight icon on hover */
 }
 
 
-/* Overlay Styling */
 .overlay {
     position: fixed;
     top: 0;

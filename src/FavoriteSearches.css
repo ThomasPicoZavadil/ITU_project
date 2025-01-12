@@ -1,3 +1,8 @@
+/*****************
+Soubor FavoriteSearches.css
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 .favorite-searches {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #e0f7fa, #0091d4);
@@ -85,7 +90,6 @@
     background: #0056b3;
 }
 
-/* Add Input Field Styling */
 .add-input {
     gap: 10px;
     justify-content: space-between;

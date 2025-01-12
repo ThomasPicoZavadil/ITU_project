@@ -1,4 +1,7 @@
-/* SavedArticles.css */
+/*****************
+Soubor SavedArticles.css
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
 
 body {
     font-family: Arial, sans-serif;
@@ -6,7 +9,6 @@ body {
     padding: 0;
     background: linear-gradient(to bottom, #e0f7fa, #0091d4);
     background-attachment: fixed;
-    /* Keeps the gradient fixed while scrolling */
     color: #ffffff;
 }
 
@@ -21,13 +23,10 @@ body {
 .resultsfor {
     text-align: left;
     font-size: 3em;
-    /* Adjust font size to make it bold but not too large */
     font-weight: bold;
     color: black;
-    /* Dark color for the text */
 }
 
-/* Total results styling */
 .totalresults {
     text-align: left;
     font-size: 2em;
@@ -41,7 +40,6 @@ body {
     color: #ffffff;
 }
 
-/* Home Icon Styling */
 .home-icon {
     position: absolute;
     top: 20px;
@@ -66,10 +64,8 @@ body {
 .show-groups-container {
     display: flex;
     justify-content: flex-start;
-    /* Align the button to the left */
     margin-top: 10px;
     margin-bottom: 20px;
-    /* Add space below the button */
 }
 
 .show-groups-button {
@@ -133,44 +129,34 @@ body {
     margin-left: 10px;
 }
 
-/* Icon Container Styling */
 .icon-container {
     display: flex;
     justify-content: flex-end;
-    /* Align icons to the right */
     align-items: center;
     gap: 15px;
-    /* Space between icons */
 }
 
 .icon {
     width: 20px;
-    /* Adjust size as needed */
     height: 20px;
 }
 
-/* Delete Icon Styling */
 .delete-icon {
     font-size: 1.5em;
-    /* Adjust icon size */
     color: #d9534f;
-    /* Red color for delete icon */
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .delete-icon:hover {
     transform: scale(1.2);
-    /* Slightly enlarge on hover */
     color: #c9302c;
-    /* Darker red on hover */
 }
 
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Vertically centers content */
     background-color: #f1f1f1;
     border-top: 1px solid #eeeeee;
     padding: 10px 15px;
@@ -183,7 +169,6 @@ body {
 .footer-content {
     text-align: left;
     flex: 1;
-    /* Takes up available space */
 }
 
 .show-more {
@@ -203,7 +188,6 @@ body {
     background-color: #0056b3;
 }
 
-/* Adjust spacing for rows and columns */
 .row {
     margin-bottom: 10px;
 }
@@ -212,7 +196,6 @@ body {
     padding: 0;
 }
 
-/* Remove underline for links */
 .card-link {
     text-decoration: none;
     color: inherit;

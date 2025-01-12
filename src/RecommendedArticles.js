@@ -1,3 +1,8 @@
+/*****************
+Soubor RecommendedArticles.js pro stránku zobrazující doporučené články
+Autor - Tomáš Zavadil (xzavadt00)
+*****************/
+
 import React, { useState, useEffect } from "react";
 import "./RecommendedArticles.css";
 import { FaHome } from "react-icons/fa";
@@ -10,13 +15,15 @@ import axios from "axios";
 
 function RecommendedArticles() {
     const navigate = useNavigate();
-    const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [articles, setArticles] = useState([]); // Stav pro doporučené články
+    const [loading, setLoading] = useState(false); // Stav načítání
     const [bookmarks, setBookmarks] = useState(() => {
+        // Načtení uložených záložek z localStorage
         const savedBookmarks = localStorage.getItem("bookmarks");
         return savedBookmarks ? JSON.parse(savedBookmarks) : [];
     });
     const [likedArticles, setLikedArticles] = useState(() => {
+        // Načtení oblíbených článků z localStorage
         const savedLikes = localStorage.getItem("likedArticles");
         return savedLikes
             ? JSON.parse(savedLikes)
@@ -27,6 +34,7 @@ function RecommendedArticles() {
             };
     });
 
+    // Funkce pro získání unikátních parametrů pro vyhledávání
     const getUniqueSearchParams = () => {
         const userAddedItems = JSON.parse(localStorage.getItem("userAddedItems")) || {
             categories: [],
@@ -34,6 +42,7 @@ function RecommendedArticles() {
             keywords: [],
         };
 
+        // Kombinace oblíbených a uživatelem přidaných parametrů
         const keywords = [...new Set([...likedArticles.likedKeywords, ...userAddedItems.keywords])];
         const categories = [...new Set([...likedArticles.likedCategories, ...userAddedItems.categories])];
         const sources = [...new Set([...likedArticles.likedSources, ...userAddedItems.sources])];
@@ -41,6 +50,7 @@ function RecommendedArticles() {
         return { keywords, categories, sources };
     };
 
+    // Funkce pro načtení doporučených článků
     const fetchRecommendedArticles = async () => {
         setLoading(true);
         const { keywords, categories, sources } = getUniqueSearchParams();
@@ -62,7 +72,6 @@ function RecommendedArticles() {
                 results.push(...response.data.articles);
             }
 
-            // Fetch articles for each source
             for (const source of sources) {
                 const response = await axios.get(
                     `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=828bf842c33f483bb89259b6304ecbc5&pageSize=10`
@@ -78,10 +87,12 @@ function RecommendedArticles() {
         setLoading(false);
     };
 
+    // Načtení článků při prvním načtení komponenty
     useEffect(() => {
         fetchRecommendedArticles();
     }, []);
 
+    // Přidání/odebrání článku ze záložek
     const handleBookmark = (article) => {
         const isBookmarked = bookmarks.some((b) => b.url === article.url);
         if (isBookmarked) {
@@ -91,10 +102,12 @@ function RecommendedArticles() {
         }
     };
 
+    // Kontrola, zda je článek v záložkách
     const isBookmarked = (article) => {
         return bookmarks.some((b) => b.url === article.url);
     };
 
+    // Přidání článku do oblíbených
     const handleLikeArticle = (article) => {
         const articleInfo = {
             keyword: article.title || "Unknown Keyword",
@@ -119,6 +132,7 @@ function RecommendedArticles() {
         });
     };
 
+    // Přidání animace pro "To se mi líbí"
     const handleThumbClick = (e) => {
         const target = e.currentTarget;
         target.classList.add("thumb-clicked");
@@ -127,10 +141,12 @@ function RecommendedArticles() {
         }, 300);
     };
 
+    // Aktualizace localStorage při změně záložek
     useEffect(() => {
         localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
     }, [bookmarks]);
 
+    // Aktualizace localStorage při změně oblíbených článků
     useEffect(() => {
         localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
     }, [likedArticles]);
